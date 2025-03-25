@@ -4,7 +4,7 @@ pipeline {
   agent any
   
   environment {
-    IMAGE_NAME = "alianib/my-python-application"
+    IMAGE_NAME = "neophoenix/my-python-application"
     DOCKER_LOGIN = 'neophoenix' // Initialisation de la variable
   }
   
