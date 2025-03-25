@@ -5,7 +5,7 @@ pipeline {
   
   environment {
     IMAGE_NAME = "alianib/my-python-application"
-    DOCKER_LOGIN = "alianib" // Initialisation de la variable
+    DOCKER_LOGIN = "neophoenix" // Initialisation de la variable
   }
   
   stages{
@@ -58,10 +58,11 @@ pipeline {
       steps {
         script {
           //withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_LOGIN', passwordVariable: 'DOCKER_PASS')]) {
-          withCredentials([string(credentialsId: 'DOCKER_PASSWORD', variable: 'DOCKER_PASS')]) {
+          withCredentials([string(credentialsId: 'DG_DOCKER', variable: 'DOCKER_PASS')]) {
             sh """
               docker build -t ${IMAGE_NAME}:${env.BUILD_VERSION} .
-              docker login --username $DOCKER_LOGIN --password $DOCKER_PASS
+              echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+              //docker login --username $DOCKER_LOGIN --password $DOCKER_PASS
               docker push ${IMAGE_NAME}:${env.BUILD_VERSION}
             """
           }
