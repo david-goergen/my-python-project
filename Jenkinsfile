@@ -61,7 +61,7 @@ pipeline {
           withCredentials([string(credentialsId: 'DG_DOCKER', variable: 'DOCKER_PASS')]) {
             sh """
               docker build -t ${IMAGE_NAME}:${env.BUILD_VERSION} .n
-              docker login --username $DOCKER_LOGIN --password $DOCKER_PASS
+              docker login -u $DOCKER_LOGIN -p $DOCKER_PASS
               docker push ${IMAGE_NAME}:${env.BUILD_VERSION}
             """
           }
