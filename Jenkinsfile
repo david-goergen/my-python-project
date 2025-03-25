@@ -4,7 +4,7 @@ pipeline {
   environment {
     IMAGE_NAME = "alianib/my-python-application"
     DOCKER_LOGIN = "alianib" // Initialisation de la variable
-    DOCKER_PWD = $DOCKER_PASSWORD
+    DOCKER_PWD = "${DOCKER_PASSWORD}"
   }
   
   stages{
