@@ -57,10 +57,9 @@ pipeline {
     stage('Docker deployment') {
       steps {
         script {
-          //withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_LOGIN', passwordVariable: 'DOCKER_PASS')]) {
           withCredentials([string(credentialsId: 'DG_DOCKER', variable: 'DOCKER_PASS')]) {
             sh """
-              docker build -t ${IMAGE_NAME}:${env.BUILD_VERSION} .n
+              docker build -t ${IMAGE_NAME}:${env.BUILD_VERSION} .
               docker login -u $DOCKER_LOGIN -p $DOCKER_PASS
               docker push ${IMAGE_NAME}:${env.BUILD_VERSION}
             """
