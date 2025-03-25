@@ -55,9 +55,9 @@ pipeline {
       steps {
         script {
           withCredentials([string(credentialsId: 'DOCKER_PASSWORD', variable: 'DOCKER_PASS')]) {
-            sh 'docker build -t ${IMAGE_NAME}:${env.BUILD_VERSION} .'
-            sh 'docker login -u $DOCKER_LOGIN -p $DOCKER_PASS'
-            sh 'docker push ${IMAGE_NAME}:${env.BUILD_VERSION}'
+            sh('docker build -t ${IMAGE_NAME}:${env.BUILD_VERSION} .')
+            sh('docker login -u $DOCKER_LOGIN -p $DOCKER_PASS')
+            sh('docker push ${IMAGE_NAME}:${env.BUILD_VERSION}')
           }
         }
       }
