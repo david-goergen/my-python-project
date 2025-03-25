@@ -52,13 +52,15 @@ pipeline {
     }
 
     stage('Docker deployment') {
-      script {
-        withCredentials([string(credentialsId: 'DOCKER_PASSWORD', variable: 'DOCKER_PASS')]) {
-          sh """
-            docker build -t ${IMAGE_NAME}:${env.BUILD_VERSION} .
-            docker login -u $DOCKER_LOGIN -p $DOCKER_PASS
-            docker push ${IMAGE_NAME}:${env.BUILD_VERSION}
-          """
+      steps {
+        script {
+          withCredentials([string(credentialsId: 'DOCKER_PASSWORD', variable: 'DOCKER_PASS')]) {
+            sh """
+              docker build -t ${IMAGE_NAME}:${env.BUILD_VERSION} .
+              docker login -u $DOCKER_LOGIN -p $DOCKER_PASS
+              docker push ${IMAGE_NAME}:${env.BUILD_VERSION}
+            """
+          }
         }
       }
     }
