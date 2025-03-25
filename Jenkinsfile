@@ -10,7 +10,8 @@ pipeline {
     stage('Set the build number') {
       steps {
         script {
-          env.BUILD_VERSION = "1.0.${BUILD_NUMBER}" // Définition dynamique
+          env.BUILD_VERSION = "1.0.${BUILD_NUMBER}" 
+          echo "current build version ${env.BUILD_VERSION}"
         }
       }
     }
@@ -24,7 +25,7 @@ pipeline {
                 sh 'pytest | tee report.txt'
               } catch (Exception e) {
                 echo "Unit testing has failed!"
-                currentBuild.result = 'UNSTABLE'  // Marque le build comme instable si les tests échouent
+                currentBuild.result = 'UNSTABLE'
               }
             }
           }
